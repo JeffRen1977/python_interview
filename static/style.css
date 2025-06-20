@@ -1,0 +1,156 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+nav {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 960px; /* Max width for larger screens */
+    margin: 20px auto; /* Centering content */
+    overflow: hidden;
+    padding: 20px;
+    background-color: #ffffff;
+    min-height: 70vh;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: 30px;
+}
+
+h1, h2 {
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-top: 30px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #e9ecef;
+    border-left: 5px solid #007bff;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+ul li:hover {
+    background-color: #dcdfe3;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #212529;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    color: #0056b3;
+}
+
+pre, .code-block {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+.description-text, .example-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+textarea#solutionCode {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+    min-height: 200px; /* Increased default height */
+}
+
+button#runCodeButton {
+    background-color: #28a745; /* Green for run */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 1em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button#runCodeButton:hover {
+    background-color: #218838;
+}
+
+.question-container {
+    padding: 10px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.results-section pre {
+    background-color: #333; /* Darker background for results */
+    color: #f8f9fa; /* Light text for results */
+    min-height: 100px;
+    padding: 15px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

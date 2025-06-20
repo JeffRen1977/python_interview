@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Coding Questions - Interview Prep App{% endblock %}
+
+{% block content %}
+    <h1>Coding Questions</h1>
+    {% if questions %}
+        <ul>
+            {% for question in questions %}
+                <li>
+                    <a href="{{ url_for('question_page', question_id=question.id) }}">
+                        {{ question.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No questions available yet.</p>
+    {% endif %}
+{% endblock %}

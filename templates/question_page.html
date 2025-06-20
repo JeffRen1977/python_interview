@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}{{ question.title }} - Interview Prep App{% endblock %}
+
+{% block content %}
+    <div class="question-container">
+        <h1>{{ question.title }}</h1>
+
+        <div class="section">
+            <h2>Description</h2>
+            <pre class="description-text">{{ question.description }}</pre>
+        </div>
+
+        {% if question.example %}
+        <div class="section">
+            <h2>Example</h2>
+            <pre class="example-text">{{ question.example }}</pre>
+        </div>
+        {% endif %}
+
+        <div class="section">
+            <h2>Your Solution</h2>
+            <p>Implement the following function:</p>
+            <pre class="code-block"><code>{{ question.function_signature }}</code></pre>
+            <textarea id="solutionCode" name="solutionCode" rows="20" placeholder="Enter your Python code here...">{{ request.args.get('code', '') }}</textarea>
+            <button id="runCodeButton" type="button">Run Code</button>
+        </div>
+
+        <div class="section results-section">
+            <h2>Results</h2>
+            <pre id="resultsOutput">Click "Run Code" to see test results.</pre>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('runCodeButton').addEventListener('click', async function() {
+            const solutionCode = document.getElementById('solutionCode').value;
+            const questionId = {{ question.id }};
+            const resultsOutput = document.getElementById('resultsOutput');
+
+            resultsOutput.textContent = 'Running tests...';
+
+            try {
+                const response = await fetch("{{ url_for('run_code') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        code: solutionCode,
+                        question_id: questionId,
+                    }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => null);
+                    let errorMessage = `Error: ${response.status} ${response.statusText}`;
+                    if (errorData && errorData.error) {
+                        errorMessage += `\nServer message: ${errorData.error}`;
+                    } else if (errorData) {
+                        errorMessage += `\nServer response: ${JSON.stringify(errorData)}`;
+                    }
+                    resultsOutput.textContent = errorMessage;
+                    return;
+                }
+
+                const data = await response.json();
+                let outputText = `Overall Success: ${data.overall_success ? 'Yes' : 'No'}\n\n`;
+
+                data.results.forEach((result, index) => {
+                    outputText += `Test Case ${index + 1}:\n`;
+                    if (result.type === 'general_error' || result.type === 'timeout_error' || result.type === 'execution_error') {
+                        outputText += `  Status: ${result.status || 'ERROR'}\n`;
+                        outputText += `  Output: ${result.output}\n\n`;
+                    } else {
+                        outputText += `  Input: ${JSON.stringify(result.input)}\n`;
+                        outputText += `  Expected: ${JSON.stringify(result.expected)}\n`;
+                        outputText += `  Actual: ${result.actual}\n`; // Actual is already a string, might contain error messages
+                        outputText += `  Status: ${result.status}\n\n`;
+                    }
+                });
+
+                if (data.raw_stderr && !data.results.some(r => r.type === 'general_error' && data.raw_stderr.includes(r.output))) {
+                    // Show raw_stderr if it contains info not already shown as a general error.
+                    // This is helpful for syntax errors that prevent any test cases from running.
+                    if (data.results.length === 0 || !data.results.find(r => r.type === "general_error" && r.output.includes(data.raw_stderr.trim()))) {
+                         // Avoid duplicating stderr if it was already part of a "general_error" result.
+                         if (data.raw_stderr.trim()) {
+                            outputText += `\n--- Standard Error Stream ---\n${data.raw_stderr.trim()}\n`;
+                         }
+                    }
+                }
+                 if (data.raw_stdout && data.results.length === 0 && !data.raw_stderr && !data.overall_success) {
+                    // If no results, no stderr, but not overall success, show stdout for debugging.
+                    // This can happen if the script structure is broken by user code.
+                     outputText += `\n--- Standard Output Stream (Debug) ---\n${data.raw_stdout.trim()}\n`;
+                 }
+
+
+                resultsOutput.textContent = outputText;
+
+            } catch (error) {
+                resultsOutput.textContent = 'An error occurred while sending code: ' + error.toString();
+            }
+        });
+    </script>
+
+    <p><a href="{{ url_for('index') }}">Back to Question List</a></p>
+{% endblock %}
