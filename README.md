@@ -1,8 +1,12 @@
-# Super Streak Problem - Python Implementation
+# python_interview
+
+This repository includes all Python code for the book "Python Interview" and various coding interview problems.
+
+## Super Streak Problem - Complete Implementation
 
 This repository contains a complete Python implementation of the Super Streak counting problem, including all follow-up questions and optimizations.
 
-## Problem Description
+### Problem Description
 
 The Super Streak problem involves counting consecutive gaming events that meet specific criteria:
 
@@ -11,42 +15,42 @@ The Super Streak problem involves counting consecutive gaming events that meet s
    - It contains at least N actions
    - The total duration spans at least X seconds
 
-## Files
+### Files
 
 - `count_super_streaks.py` - Main implementation with all solutions
 - `count_super_streaks_test.py` - Comprehensive test cases
 - `demo_super_streak.py` - Interactive demonstration
 - `count_super_streaks.txt` - Original problem statement
 
-## Solutions Implemented
+### Solutions Implemented
 
-### 1. Main Solution (Single User)
+#### 1. Main Solution (Single User)
 - **Function**: `count_super_streaks(events, N, T, X)`
 - **Time Complexity**: O(n)
 - **Space Complexity**: O(1)
 - **Algorithm**: 2-pointer technique
 
-### 2. Multiple Users Solution
+#### 2. Multiple Users Solution
 - **Function**: `count_super_streaks_multiple_users(events, N, T, X)`
 - **Time Complexity**: O(n)
 - **Space Complexity**: O(n)
 - **Approach**: Group events by user, then apply single-user algorithm
 
-### 3. Space-Optimized Multiple Users
+#### 3. Space-Optimized Multiple Users
 - **Function**: `count_super_streaks_optimized(events, N, T, X)`
 - **Time Complexity**: O(n)
 - **Space Complexity**: O(m) where m = number of unique users
 - **Approach**: State management for each user
 
-### 4. Time Range Queries
+#### 4. Time Range Queries
 - **Class**: `SuperStreakTracker`
 - **Preprocessing**: O(n)
 - **Query Time**: O(log k) per query
 - **Feature**: Binary search on sorted streak intervals
 
-## Usage Examples
+### Usage Examples
 
-### Basic Usage
+#### Basic Usage
 ```python
 from count_super_streaks import Event, count_super_streaks
 
@@ -65,7 +69,7 @@ result = count_super_streaks(events, N=4, T=10, X=30)
 print(f"Super streaks found: {result}")  # Output: 1
 ```
 
-### Multiple Users
+#### Multiple Users
 ```python
 from count_super_streaks import MultiUserEvent, count_super_streaks_multiple_users
 
@@ -80,7 +84,7 @@ result = count_super_streaks_multiple_users(events, N=3, T=10, X=20)
 print(result)  # Output: {1: 1, 2: 1}
 ```
 
-### Time Range Queries
+#### Time Range Queries
 ```python
 from count_super_streaks import SuperStreakTracker
 
@@ -92,49 +96,39 @@ count = tracker.count_streaks_in_range(1, 25, 55)
 print(f"Super streaks in range: {count}")
 ```
 
-## Running the Code
+### Running the Code
 
-### Run Tests
+#### Run Tests
 ```bash
 python3 count_super_streaks_test.py
 ```
 
-### Run Demo
+#### Run Demo
 ```bash
 python3 demo_super_streak.py
 ```
 
-### Run Main Solution with Tests
+#### Run Main Solution with Tests
 ```bash
 python3 count_super_streaks.py
 ```
 
-## Test Cases
+### Algorithm Details
 
-The implementation includes comprehensive test cases covering:
-
-1. **Main Problem Example**: Original test case from problem statement
-2. **Multiple Users**: Multi-user scenario with different users having different super streak counts
-3. **Time Range Queries**: Testing time range query functionality
-4. **Edge Cases**: Empty events, single events, insufficient count/duration
-5. **Custom Scenarios**: Multiple super streaks, complex event sequences
-
-## Algorithm Details
-
-### Two-Pointer Approach
+#### Two-Pointer Approach
 The main algorithm uses a two-pointer technique:
 1. **Left pointer**: Marks the start of a potential streak
 2. **Right pointer**: Extends the streak as long as conditions are met
 3. **Streak validation**: Check if completed streak meets super streak criteria
 4. **Pointer advancement**: Move to next potential streak start
 
-### Key Insights
+#### Key Insights
 - Only check for super streak criteria when a streak ends
 - Handle edge case where the last streak continues until the end
 - Efficiently process events without storing intermediate results (space optimization)
 - Use binary search for fast time range queries
 
-## Performance Characteristics
+### Performance Characteristics
 
 | Solution | Time Complexity | Space Complexity | Best Use Case |
 |----------|----------------|------------------|---------------|
@@ -148,7 +142,7 @@ Where:
 - m = number of unique users
 - k = number of super streaks per user
 
-## Real-World Applications
+### Real-World Applications
 
 This solution can be applied to:
 - Gaming analytics and player behavior analysis
@@ -157,10 +151,20 @@ This solution can be applied to:
 - Time-series data analysis
 - Activity pattern recognition
 
-## Dependencies
+### Dependencies
 
 - Python 3.6+
 - No external dependencies required (uses only standard library)
+
+## Other Interview Problems
+
+This repository also contains solutions to various other coding interview problems, including:
+- Binary search problems
+- Tree and graph algorithms
+- Dynamic programming
+- String manipulation
+- Array and linked list problems
+- And many more!
 
 ## License
 
