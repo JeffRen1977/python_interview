@@ -1,0 +1,287 @@
+Imagine you're a developer for a gaming company. You're given a long list of actions from a player. Your task is to find and count how many times the player achieved a "Super Streak". Each action the player takes is an Event that looks like this:
+
+struct Event {
+
+int event_id;
+
+string event_type;
+
+int event_time;
+
+};
+
+The Rules of the Game
+
+Here’s how you find a "Super Streak" It’s a two-step process:
+
+
+
+first, you find a basic "streak," and when the basic streak breaks
+
+then you check if that streak is "super."
+
+Step 1: Finding a Streak
+
+A player is in a "streak" as long as they keep doing the same event type again and again, without taking too long between actions.
+
+
+
+A streak continues if the next action has the same event_type.
+
+(Rule T): the time gap between it and the previous action is less than or equal to T.
+
+A streak ends if the player does a different action, OR if they take too long (more than T seconds) to act again.
+
+Step 2: Checking if a Streak is "Super"
+
+As soon as a streak ends, you have to check if it was good enough to be a "Super Streak". To qualify, the streak you just found must meet both of these conditions:
+
+(Rule N): The streak must contain at least N actions.
+
+(Rule X): The total time from the start of the streak to the end of the streak must be at least X seconds.
+
+Objective: find and count how many times the player achieved a "Super Streak"
+
+Eg Test Case Input:
+
+
+
+N = 4: You need at least 4 actions in the streak.
+
+T = 10: You can't take more than 10 seconds between actions.
+
+X = 30: The whole streak must span at least 30 seconds.
+
+
+
+{101, "jump", 10},
+
+{102, "jump", 18},
+
+{201, "roll", 25},
+
+{202, "roll", 30},
+
+{204, "roll", 60},
+
+{205, "roll", 68},
+
+{206, "roll", 76},
+
+{207, "roll", 85},
+
+{301, "collect_coin", 98},
+
+{302, "collect_coin", 105},
+
+{303, "collect_coin", 112},
+
+{304, "collect_coin", 122},
+
+{305, "collect_coin", 131},
+
+{306, "collect_coin", 140},
+
+{401, "use_power", 150}
+
+explanation:
+
+
+
+[10, 18] -> NO
+
+[25, 30] -> NO
+
+[60, 68, 76, 85] -> NO
+
+[98, 105, 112, 122, 131, 140] -> YES
+
+[150] -> NO
+
+Output: 1
+
+
+
+Expected time complexity: O(n) using 2 pointer solution
+
+Expected space complexity: O(1)
+
+Background
+
+Let the candidate know they can assume the following
+
+
+
+Candidate should mention the assumption that the events array is sorted. Or they should ask this as a clarifying question.
+
+Candidate can assume the input format - ideal input format is vector of Events
+
+Common Issues
+
+How to address frequently asked questions or places where the candidate commonly gets stuck
+
+
+
+One most common issue I have seen is candidate increasing the ans as soon as all the super streaks conditions are met which is wrong. In the question it is clearly mentioned that we have to check for super streak conditions only when the streak ends.
+
+In the given input example
+
+
+
+{301, "collect_coin", 98},
+
+{302, "collect_coin", 105},
+
+{303, "collect_coin", 112},
+
+{304, "collect_coin", 122},
+
+{305, "collect_coin", 131},
+
+{306, "collect_coin", 140},
+
+The candidate should not increase the answer while processing the 5th element but instead should wait for the streak to be over and then check the super streak conditions and increment the answer
+
+
+
+Some candidates might ask if they can take the input as vector of vector, which is not possible since the input has integer as well as string
+
+Candidate should ask if the Events array will contain at least 1 entry, if they don't ask they should handle that edge case in the code
+
+Most candidates miss out the edge case of when the streak is ending at last event. Look out for this.
+
+Follow Up Question #1: Counting super streaks for m different users
+
+Find super streaks for different user ids - total unique users m
+
+
+
+// new definition of Event structstruct Event {
+
+int user_id;
+
+int event_id;
+
+string event_type;
+
+int event_time;
+
+};
+
+N = 3: A streak must have at least 3 events.
+
+T = 10: The maximum time gap between consecutive events in a streak is 10 seconds.
+
+X = 20: The total duration of a streak must be at least 20 seconds.
+
+
+
+{1, 101, "jump", 10},
+
+{2, 201, "crouch", 12},
+
+{1, 102, "jump", 15},
+
+{2, 202, "crouch", 18},
+
+{1, 103, "jump", 28},
+
+{2, 203, "crouch", 22},
+
+{1, 104, "jump", 35},
+
+{2, 204, "crouch", 30},
+
+{1, 105, "jump", 42},
+
+{3, 301, "roll", 20},
+
+{2, 205, "other", 35},
+
+{1, 106, "jump", 50},
+
+{2, 206, "crouch", 60},
+
+{1, 107, "run", 55},
+
+{2, 207, "crouch", 65},
+
+{2, 208, "crouch", 72},
+
+{2, 209, "crouch", 81},
+
+{2, 210, "crouch", 95},
+
+{3, 302, "roll", 30}
+
+Output
+
+
+
+uid-1 -> 1
+
+uid-2 -> 1
+
+uid-3 -> 0
+
+Explanation
+
+
+
+{103, 104, 105, 106}. Count=4 (>= N). Duration=50-28=22 (>= X). SUPER STREAK
+
+{206, 207, 208, 209}. Count=4 (>= N). Duration=81-60=21 (>= X). SUPER STREAK
+
+One simple solution is to segregate the events of all the users in a map and then call the function developed in main question on each of the userid
+
+
+
+Expected time complexity: O(n)
+
+Expected space complexity: O(n)
+
+Clarification points:
+
+
+
+All the elements may not seems sorted by time, but all the events of any specific user are still sorted by time
+
+Looking at the example TC may implement the solution for m unique users assuming user ids will be 1 to m, interviewer can then point out how to tweak the solution if the user ids are some random number
+
+Follow Up Question #2: Follow-up Question 2 - space optimization for follow up 1:
+
+Assume events >>> users. Can we reduce the space complexity without increasing the time complexity?
+
+Space complexity can be reduced by using state management for each user. (when events >>> users)
+
+
+
+struct StreakInfo {
+
+string event_type;
+
+int start_time;
+
+int last_event_time;
+
+int count;
+
+};
+
+TC might create 4 vectors instead of the struct. This can give us signals on the coding style of candidate. For L4 candidate this can be a negative signal
+
+
+
+Expected time complexity: O(n)
+
+Expected space complexity: O(number of unique users)
+
+Follow Up Question #3: support time range queries
+
+This followup can be coded (L4) or discussed verbally (L3) as time permits
+
+Range Queries: After processing all events, support a query countStreaks(user_id, time_A, time_B) that returns how many super streaks a specific user completed entirely within that time range. How do you structure the data for fast responses?
+
+
+
+DSA Concept: This requires data indexing. You could pre-calculate all super streaks and store their start/end times in a sorted list for each user. Queries could then be answered in O(log K_u) time using binary search (where K_u is the number of super streaks for that user).
