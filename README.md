@@ -2,6 +2,45 @@
 
 This repository includes all Python code for the book "Python Interview" and various coding interview problems.
 
+## Repository Structure
+
+### File Organization
+
+All algorithm files follow a consistent numbering scheme: `{category}-{number}_{algorithm_name}.py`
+
+**Categories:**
+- `2-x`: String and Array Problems
+- `3-x`: String Manipulation
+- `4-x`: Array Problems
+- `5-x`: Greedy Algorithms
+- `6-x`: Data Structures
+- `8-x`: Linked Lists
+- `9-x`: Trees
+- `12-x`: Binary Search
+- `13-x`: Two-Pointer Method
+- `14-x`: Dynamic Programming
+- `15-x`: Depth-First Search (DFS)
+- `16-x`: Backtracking
+- `17-x`: Breadth-First Search (BFS) and Graph Algorithms
+- `18-x`: Union-Find
+- `19-x`: Advanced Algorithms
+
+### Documentation
+
+Each algorithm includes detailed documentation in the `demo/` folder:
+- **Demo Scripts**: Step-by-step execution examples (`*_demo.py`)
+- **Markdown Documentation**: Comprehensive explanations with:
+  - Problem description and key insights
+  - Detailed step-by-step examples
+  - Algorithm logic and pseudocode
+  - Complexity analysis
+  - Edge cases and common mistakes
+  - Visual representations and timelines
+
+**Example:**
+- Algorithm: `12-1_mySqrt.py`
+- Documentation: `demo/12-1_mySqrt_output.md`
+
 ## Super Streak Problem - Complete Implementation
 
 This repository contains a complete Python implementation of the Super Streak counting problem, including all follow-up questions and optimizations.
@@ -151,20 +190,118 @@ This solution can be applied to:
 - Time-series data analysis
 - Activity pattern recognition
 
-### Dependencies
+## Getting Started
+
+### Prerequisites
 
 - Python 3.6+
 - No external dependencies required (uses only standard library)
 
-## Other Interview Problems
+### Running Algorithms
 
-This repository also contains solutions to various other coding interview problems, including:
-- Binary search problems
-- Tree and graph algorithms
-- Dynamic programming
-- String manipulation
-- Array and linked list problems
-- And many more!
+Each algorithm file can be run directly:
+
+```bash
+python3 12-1_mySqrt.py
+python3 17-2_curriculum.py
+# etc.
+```
+
+### Reading Documentation
+
+Detailed documentation for each algorithm is available in the `demo/` folder:
+
+```bash
+# View markdown documentation
+cat demo/12-1_mySqrt_output.md
+cat demo/17-2_curriculum_output.md
+# etc.
+```
+
+### Contributing
+
+When adding new algorithms:
+1. Follow the numbering scheme: `{category}-{number}_{algorithm_name}.py`
+2. Include a `main()` function with test cases
+3. Add detailed comments explaining the algorithm
+4. Create documentation in the `demo/` folder if needed
+
+## Algorithm Categories
+
+### Binary Search (12-x)
+- `12-1_mySqrt.py` - Integer square root
+- `12-2_search_rotated_array.py` - Search in rotated sorted array
+- `12-3_search_intervals.py` - Interval search with range table
+
+### Two-Pointer Method (13-x)
+- `13-1_sparse_vector_product.py` - Dot product of sparse vectors
+- `13-2_minimum_window_substring.py` - Minimum window substring
+- `13-3_interval_intersection.py` - Interval intersection
+- `13-4_maximum_consecutive_ones.py` - Maximum consecutive ones with K flips
+- `13-5_find_anagrams.py` - Find all anagrams
+
+### Dynamic Programming (14-x)
+- `14-1_maxProfit.py` - Best time to buy and sell stock
+- `14-2_coin_change.py` - Coin change problem
+- `14-3_decoding_ways.py` - Decode ways
+
+### Depth-First Search (15-x)
+- `15-1_pacific_atlantic_currents.py` - Pacific Atlantic water flow
+- `15-2_predict_winner.py` - Predict the winner (minimax)
+- `15-3_expression_add_operator.py` - Expression add operators
+
+### Backtracking (16-x)
+- `16-1_sudoku_solver.py` - Sudoku solver
+- `16-2_robot_vacuum.py` - Robot room cleaner
+
+### BFS and Graph Algorithms (17-x)
+- `17-1_walls_and_gates.py` - Multi-source BFS for shortest distances
+- `17-2_curriculum.py` - Course schedule (topological sort)
+- `17-3_bus_routes.py` - Minimum buses to destination
+- `17-4_isBipartite.py` - Bipartite graph detection
+- `17-5_word_ladder_II.py` - Word ladder II (all shortest paths)
+
+### Union-Find (18-x)
+- `18-1_union_find.py` - Union-Find data structure
+
+### Advanced Algorithms (19-x)
+- `19-1_FileSystem.py` - File system size calculation (DFS)
+- `19-2_longest_significant_chain.py` - Longest word chain
+- `19-3_NumbCircles.py` - Circle groups (connected components)
+
+### String and Array Problems (2-x)
+- `2-2_binaryAddition.py` - Binary addition
+- `2-3_random_indexing.py` - Random indexing
+- `2-4_next_permuation.py` - Next permutation
+- `2-5_valid_decimal_numbers.py` - Valid decimal numbers
+
+### Additional Categories
+- **String Manipulation (3-x)**: Minimum remove parentheses
+- **Array Problems (4-x)**: Shortest array larger than K
+- **Greedy Algorithms (5-x)**: Minimum cost to hire, traffic light
+- **Data Structures (6-x)**: Subarrays sum to K, LRU cache
+- **Linked Lists (8-x)**: Cycle detection, intersection, deep copy
+- **Trees (9-x)**: Lowest common ancestor, serialize/deserialize
+
+## Features
+
+- **Comprehensive Solutions**: Each algorithm includes:
+  - Clean, well-commented code
+  - Multiple test cases
+  - Main function with examples
+  - Detailed documentation
+
+- **Educational Focus**: 
+  - Step-by-step explanations
+  - Complexity analysis
+  - Visual representations
+  - Common mistakes and edge cases
+
+- **Production Ready**:
+  - Type hints
+  - Error handling
+  - Edge case coverage
+  - Performance optimizations
 
 ## License
 
