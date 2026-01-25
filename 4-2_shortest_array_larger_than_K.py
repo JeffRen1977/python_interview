@@ -20,6 +20,14 @@ class Solution:
                 q.popleft()  # Remove the element from the front of the deque
 
             # Maintain monotonicity by removing elements from the back
+            # Why remove when q[-1][1] >= cumsum?
+            # 1. If we have prefix_sum_old >= prefix_sum_new, then for any future j:
+            #    cumsum_j - prefix_sum_new >= cumsum_j - prefix_sum_old
+            #    This means prefix_sum_new can give us a shorter valid subarray
+            # 2. Since index_new > index_old, even with same sum difference,
+            #    prefix_sum_new gives shorter subarray (j - index_new < j - index_old)
+            # 3. Therefore, prefix_sum_old is never useful and can be removed
+            # This maintains the deque in increasing order of prefix sums
             while q and q[-1][1] >= cumsum:
                 q.pop()
 
